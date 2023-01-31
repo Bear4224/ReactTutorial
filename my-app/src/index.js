@@ -125,9 +125,10 @@ class Game extends React.Component {
 
     //For each board in history, display a button with a key
     //equal to the highest number of filled out squares
+    
+    //Step is for each each board object, move is its index and has
+    //absolutely nothing to do with its contents
     const moves = history.map((step, move) => {
-      console.log(step);
-      console.log(move);
       const desc = move ?
         'Go to move #' + move :
         'Go to game start';
@@ -140,15 +141,18 @@ class Game extends React.Component {
         </li>
       );
     });
-    console.log(history);
-    console.log(moves);
 
     //Update the status text to reflect who's won or taking
     //their turn, to be displayed in the return statement
     let status;
+    console.log(this.state.stepNumber)
     if (winner) {
       status = "Winner: " + winner;
-    } else {
+    }
+    else if (this.state.stepNumber == 9){
+      status = "Tie!"
+    }
+    else {
       status = "Next player: " + (this.state.xIsNext ? "X" : "O");
     }
 
